@@ -2,8 +2,20 @@ import logo from './logo.svg';
 import React, { Component } from 'react';
 import './App.css';
 import TextEditor from './slate/TextEditor'
+import Login from './components/Login'
 
 class App extends Component {
+
+  state = {
+    view: "login"
+  }
+
+  changeToNotebook = () => {
+
+    this.setState({ view: 'notebook'})
+
+  }
+
 
 
   componentDidMount(){
@@ -26,11 +38,16 @@ class App extends Component {
       .then(r => r.json())
       .then(console.log) 
   }
+
+
   render(){
     return (
   
       <div className="App">
-        <TextEditor/>
+
+        <Login changeToNotebook= {this.changeToNotebook}/>
+
+        <TextEditor />
       </div>
     );
   }
