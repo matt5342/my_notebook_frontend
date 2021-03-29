@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import FlippingPages from 'flipping-pages'
+import 'flipping-pages/FlippingPages.css'
 // import TextEditor from './slate/TextEditor'
 import Login from './components/Login'
 import Navigation from './components/Navigation';
@@ -16,12 +18,14 @@ class App extends Component {
     view: "default", 
     user: {}, 
     currentChapter: null, 
-    currentPage: null
+    currentPage: null, 
+    isReady: false
   }
 
   setUser = (userObj) => {
     this.setState({
-      user: userObj
+      user: userObj, 
+      isReady: true
     })
   }
   handleLogout = () => {
@@ -53,7 +57,7 @@ class App extends Component {
   renderView = () => {    
     switch (this.state.view) {
       case 'home':
-        return <Home changeView={this.changeView} />
+        return <Home isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
       case 'login':
         return <Login setUser={this.setUser} changeView={this.changeView} />
       case 'signup':
@@ -67,8 +71,8 @@ class App extends Component {
       case 'new chapter':
         return <NewChapter  user={this.state.user} changeView={this.changeView} />
       default: 
-        return <Home changeView={this.changeView} />  
-      
+        return <Home isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
+
     }
   }
   passChapter = (chapter) => {

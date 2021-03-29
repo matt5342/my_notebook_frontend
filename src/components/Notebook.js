@@ -10,6 +10,7 @@ export default class Notebook extends Component {
     state = {
         chapters: [], 
         title: "",
+        finished: true
     }
 
     handleChange = e => {
@@ -25,9 +26,16 @@ export default class Notebook extends Component {
             })
             .then(r => r.json())
             .then(chapters => {
-              this.setState({
-                  chapters: chapters
-                })
+                // debugger
+                if (Object.keys(chapters).includes("error")){
+                    let noChapters = null
+                    this.setState({ chapters: noChapters})
+                }
+                else {
+                    this.setState({
+                        chapters: chapters
+                      })
+                }
             })
         }
     }
@@ -56,13 +64,37 @@ export default class Notebook extends Component {
         return str
     }
 
-
+    handleSubmit = (e) => {
+        e.preventDefault()
+        let reqObj = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": localStorage.token
+            },
+            body: JSON.stringify({
+                notebook: {
+                    title: this.state.title
+                }
+            })
+        }
+        fetch('http://localhost:3000/users/' + this.props.user.id + '/chapter', reqObj)
+        .then(r => r.json())
+        .then(data => {
+            // debugger
+            this.setState({
+                finished: false
+            })
+            this.props.changeView('notebook')
+        }) 
+    }
     
 
 
 
 
     renderChapters = (chapter) => {
+        // debugger
         return (
             <div>
                 <h2>Chapters:</h2>
@@ -94,18 +126,25 @@ export default class Notebook extends Component {
                     </OverlayTrigger>
 
                 </ol>
+               
             </div>
         )
-        // this.state.chapters.map(chapter => <Chapter chapter={chapter} />)
+    }
+
+    renderIfNoChapters = () => {
+        return (
+            <div>
+                <h2>No Chapters Yet!</h2>
+                <Button>Add a Chapter</Button>
+            </div>
+        )
     }
 
     render() {
         return (
             <div className="container m-3">
                 <div className="row justify-content-md-center">
-                       {this.renderChapters()}
-
-
+                       { this.state.chapters ? this.renderChapters() : this.renderIfNoChapters() }
                 </div>
             </div>
         )
