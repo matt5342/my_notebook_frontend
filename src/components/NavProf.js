@@ -6,6 +6,7 @@ const NavProf = ({user}) => {
     return (
         <>
         {user.username}   <img className="rounded" style={{ height: 40}} src={user.avatar}></img>
+
         </>
     )
 }

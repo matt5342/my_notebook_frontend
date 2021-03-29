@@ -3,8 +3,7 @@ import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 import NavProf from './NavProf'
 
 const Navigation = (props) => {
-    // console.log(props.user.username?.())
-    // debugger
+
     let isUser = () => {
         if (props.user === undefined){
             return false
@@ -13,8 +12,6 @@ const Navigation = (props) => {
             return Object.keys(props.user).includes('username')  
         }
     }
-    // Object.keys(props.user).includes('username') ? isUser = true : isUser = false
-    // debugger
 
 
     return (
@@ -24,12 +21,19 @@ const Navigation = (props) => {
                     My Notebook
             </Navbar.Brand>
             <Navbar.Toggle />
+            <Navbar.Text>
+                <a href='#notebook' name="notebook" onClick={(e) => props.changeView(e.target.name)}>Notebook</a>
+            </Navbar.Text>
 
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                     <a href="#login" name={ isUser() ? "logout" : "login"} 
                         onClick={(e) => props.changeView(e.target.name)} >
-                        { isUser() ? <NavProf user={props.user} />  : "Login"}
+                        { isUser() ? 
+                        <NavDropdown title={<NavProf user={props.user} />} id='basic-nav-dropdown'>
+                                <NavDropdown.Item onClick={() => props.changeView('logout')} >Logout</NavDropdown.Item>
+                        </NavDropdown>  
+                        : "Login"}
                     </a>
                 </Navbar.Text>
             </Navbar.Collapse>

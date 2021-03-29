@@ -5,12 +5,17 @@ import Login from './components/Login'
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
+import Notebook from './components/Notebook';
+import Chapter from './components/Chapter';
+import Page from './components/Page';
 
 class App extends Component {
 
   state = {
     view: "default", 
-    user: {}
+    user: {}, 
+    currentChapter: null, 
+    currentPage: null
   }
 
   setUser = (userObj) => {
@@ -52,10 +57,26 @@ class App extends Component {
         return <Login setUser={this.setUser} changeView={this.changeView} />
       case 'signup':
         return <SignUp setUser={this.setUser} changeView={this.changeView} />
+      case 'notebook':
+        return <Notebook user={this.state.user} passChapter={this.passChapter} changeView={this.changeView} />
+      case 'chapter':
+        return <Chapter chapter={this.state.currentChapter} passPage={this.passPage} user={this.state.user} changeView={this.changeView} />
+      case 'page':
+        return <Page page={this.state.currentPage} user={this.state.user} changeView={this.changeView} />
       default: 
         return <Home changeView={this.changeView} />
 
     }
+  }
+  passChapter = (chapter) => {
+    this.setState({
+      currentChapter: chapter
+    })
+  }
+  passPage = (page) => {
+    this.setState({
+      currentPage: page
+    })
   }
 
   render(){

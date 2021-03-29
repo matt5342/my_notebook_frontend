@@ -51,7 +51,7 @@ export default class Login extends Component {
                     <input type="password" name='password' className="form-control" placeholder="Enter password" onChange={e => this.handleChange(e)} />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <button type="submit" className="btn btn-primary btn-block">Log In</button>
                 <p className="forgot-password text-right">
                     Not a member? <a href="#" name='signup' onClick={(e) => this.props.changeView(e.target.name)}>Sign Up</a>
                 </p>
