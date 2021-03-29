@@ -26,14 +26,14 @@ export default class SignUp extends Component {
                     username: this.state.username,
                     password: this.state.password, 
                     bio: 'This is my bio!',
-                    avatar: 'http://cdn.onlinewebfonts.com/svg/img_258083.png'
+                    avatar: 'https://images.creativemarket.com/0.1.0/ps/270552/1360/906/m1/fpnw/wm1/ywsqng3enzx0tnc7usiamfdrfkkfdjomensdxbh8tkljzkkdh0ezvqnicbjjuttp-.jpg?1418479999&s=9207a2e80236dbd5dff8493556726e37'
                 }
             })
         }
-        fetch('http://localhost:3000/api/v1/login', reqObj)
+        fetch('http://localhost:3000/api/v1/signup', reqObj)
         .then(r => r.json())
         .then(data => {
-            debugger
+            // debugger
                 localStorage.setItem("token", data.jwt)
                 this.props.setUser(data.user)
                 this.props.changeView('home')

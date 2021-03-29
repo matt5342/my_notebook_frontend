@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Home-pages {
+  background-size: contain;
+  background-position: center;
+  height: 100vh;
+  perspective: 960px;
+  opacity: 20%;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.Home-page {
+  background-image: url("http://2.bp.blogspot.com/-MEkIz1Bld0c/T_4oRfvREPI/AAAAAAAAA8k/wZHwb6kUPlw/s1600/blank+book+cover.jpg");
+  color: white;
+  opacity: 100%;
+  height: 100%;
+}
+
+.Home-page_red {
+  background-image: url('https://clipart.info/images/ccovers/15036912169-open-book-png-image.png');
+  /* background: #f44336; */
+  opacity: 100%;
+}
+
+.Home-page_green {
+  background: #4caf50;
+}
+
+.Home-page_blue {
+  background: #2196f3;
+}
+
+.Home-page_orange {
+  background: #ff9800;
+}

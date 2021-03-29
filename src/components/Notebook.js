@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Chapter from './Chapter'
+import Button from 'react-bootstrap/Button'
 
 
 export default class Notebook extends Component {
@@ -15,9 +15,16 @@ export default class Notebook extends Component {
             })
             .then(r => r.json())
             .then(chapters => {
-              this.setState({
-                  chapters: chapters
-                })
+                // debugger
+                if (Object.keys(chapters).includes("error")){
+                    let noChapters = null
+                    this.setState({ chapters: noChapters})
+                }
+                else {
+                    this.setState({
+                        chapters: chapters
+                      })
+                }
             })
         }
     }
@@ -34,6 +41,7 @@ export default class Notebook extends Component {
     }
 
     renderChapters = (chapter) => {
+        // debugger
         return (
             <div>
                 <h2>Chapters:</h2>
@@ -44,16 +52,25 @@ export default class Notebook extends Component {
                 })
                 }
                 </ol>
+                <Button>Add a Chapter</Button>
             </div>
         )
-        // this.state.chapters.map(chapter => <Chapter chapter={chapter} />)
+    }
+
+    renderIfNoChapters = () => {
+        return (
+            <div>
+                <h2>No Chapters Yet!</h2>
+                <Button>Add a Chapter</Button>
+            </div>
+        )
     }
 
     render() {
         return (
             <div className="container m-3">
                 <div className="row justify-content-md-center">
-                       {this.renderChapters()}
+                       { this.state.chapters ? this.renderChapters() : this.renderIfNoChapters() }
                 </div>
             </div>
         )
