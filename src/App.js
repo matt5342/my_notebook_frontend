@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import Notebook from './components/Notebook';
 import Chapter from './components/Chapter';
 import Page from './components/Page';
+import NewChapter from './components/NewChapter';
 
 class App extends Component {
 
@@ -63,9 +64,11 @@ class App extends Component {
         return <Chapter chapter={this.state.currentChapter} passPage={this.passPage} user={this.state.user} changeView={this.changeView} />
       case 'page':
         return <Page page={this.state.currentPage} user={this.state.user} changeView={this.changeView} />
+      case 'new chapter':
+        return <NewChapter  user={this.state.user} changeView={this.changeView} />
       default: 
-        return <Home changeView={this.changeView} />
-
+        return <Home changeView={this.changeView} />  
+      
     }
   }
   passChapter = (chapter) => {
