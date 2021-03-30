@@ -41,7 +41,10 @@ export default class Chapter extends Component {
         return (
             <div>
                 <h2>{this.props.chapter.title}</h2>
-                {this.state.pages.map(page => {
+
+                {this.state.pages.length > 0 && <Page pages={this.state.pages} />}
+                
+                {/* {this.state.pages.map(page => {
                     return <div>
                         <Accordion >
                             <Card>
@@ -55,7 +58,7 @@ export default class Chapter extends Component {
                         </Accordion>
                     </div>
                     })
-                }
+                } */}
             </div>
         )
     }

@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.indexcontainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.indexcontainer div{
+  margin-right: 30px;
+  cursor: pointer; 
+}
+
+.selectedpage textarea{
+width: 500px;
+height: 400px;
+}
+
+.pagescontainer{
+  padding: 0 3%;
+}

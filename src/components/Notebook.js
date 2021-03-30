@@ -65,7 +65,8 @@ export default class Notebook extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        
         let reqObj = {
             method: 'POST',
             headers: {
@@ -73,7 +74,7 @@ export default class Notebook extends Component {
                 "Authorization": localStorage.token
             },
             body: JSON.stringify({
-                notebook: {
+                chapter: {
                     title: this.state.title
                 }
             })
@@ -82,10 +83,11 @@ export default class Notebook extends Component {
         .then(r => r.json())
         .then(data => {
             // debugger
-            this.setState({
-                finished: false
-            })
-            this.props.changeView('notebook')
+            this.getChapters()
+            console.log(data)
+
+            
+            // this.props.changeView('notebook')
         }) 
     }
     
@@ -99,8 +101,8 @@ export default class Notebook extends Component {
             <div>
                 <h2>Chapters:</h2>
                 <ol>
-                {this.state.chapters.map(chapter => {
-                    return <li className="list-group-item" onClick={() => this.renderChapter(chapter)}><span className='' style={{float:'left'}}>{this.capitalWords(chapter)}</span>......................................................<span className='badge' style={{float:'right'}}>{chapter.page_count}</span></li>
+                {this.state.chapters.map((chapter,i) => {
+                    return <li className="list-group-item" key={i} onClick={() => this.renderChapter(chapter)}><span className='' style={{float:'left'}}>{this.capitalWords(chapter)}</span>......................................................<span className='badge' style={{float:'right'}}>{chapter.page_count}</span></li>
                 })
                 }
                 {/* This button renders the new chapter view */}
@@ -112,9 +114,9 @@ export default class Notebook extends Component {
                     overlay={
                         <Popover id={`popover-positioned-${'bottom'}`}>
                         
-                        <Popover.Content>
-                        <form>
-                            <label for="fname">Title:</label>
+                        <Popover.Content>                            
+                        <form onSubmit={(e) => this.handleSubmit(e)}>
+                            <label htmlFor="fname">Title:</label>
                             <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
                             <input type="submit" value="Submit"></input>
                         </form>
