@@ -37,9 +37,11 @@ class Home extends Component {
     }
     
     next() {
+        let renderNotebook = setTimeout(this.props.changeView("notebook"), 450)
         this.setState(state => ({
             selected: state.selected + 1
         }))
+       return renderNotebook
     }
     renderPageFlip = () => {
         return (
@@ -52,6 +54,8 @@ class Home extends Component {
                 touch-action="none"
             >
                 <div className="Home-page Home-page_red">{this.state.selected}</div>
+                {this.nextPage()}
+                {this.nextPage()}
                 {this.nextPage()}
                 {this.nextPage()}
                 {this.nextPage()}
@@ -74,9 +78,7 @@ class Home extends Component {
     }
     nextPage = () => {
         // debugger
-        while (this.state.selected <= this.totalPages){
             return <div className="Home-page Home-page_green">{this.state.selected}</div>
-        }
     }
     getNotebook = () => {
         // debugger
