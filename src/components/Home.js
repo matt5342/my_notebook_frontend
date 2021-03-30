@@ -10,14 +10,74 @@ import 'flipping-pages/FlippingPages.css'
 let book_background = require(`../assets/blank_book_cover.jpeg`) 
 
 class Home extends Component {
-
-
-    state = {
-        notebook: [],
-        finished: false, 
-        title: ''
+    
+    
+    constructor(props) {
+        super(props)
+        this.totalPages = 100
+        this.state = {
+            selected: 0,
+            notebook: [],
+            finished: false, 
+            title: ''
+        }
+        this.handleSelectedChange = this.handleSelectedChange.bind(this)
+        this.previous = this.previous.bind(this)
+        this.next = this.next.bind(this)
     }
     
+    handleSelectedChange(selected) {
+        this.setState({selected})
+    }
+    
+    previous() {
+        this.setState(state => ({
+            selected: state.selected - 1
+        }))
+    }
+    
+    next() {
+        this.setState(state => ({
+            selected: state.selected + 1
+        }))
+    }
+    renderPageFlip = () => {
+        return (
+            <div className="Home">
+            <FlippingPages
+                className="Home-pages"
+                direction="horizontal"
+                selected={this.state.selected}
+                onSelectedChange={this.handleSelectedChange}
+                touch-action="none"
+            >
+                <div className="Home-page Home-page_red">{this.state.selected}</div>
+                {this.nextPage()}
+                {this.nextPage()}
+                {this.nextPage()}
+                {this.nextPage()}
+                {/* <div className="Home-page Home-page_blue">{this.state.selected}</div>
+                <div className="Home-page Home-page_orange">3</div> */}
+            </FlippingPages>
+            {/* Buttons are required for keyboard navigation */}
+            <button
+                onClick={this.previous}
+                disabled={!this.state.selected}
+            >Previous</button>
+            <button
+                onClick={this.next}
+                disabled={this.state.selected + 1 === this.totalPages}
+            >Next</button> 
+           </div> 
+        )
+        
+    }
+    nextPage = () => {
+        // debugger
+        while (this.state.selected <= this.totalPages){
+            return <div className="Home-page Home-page_green">{this.state.selected}</div>
+        }
+    }
     getNotebook = () => {
         // debugger
         if(localStorage.getItem("token")) {
@@ -108,19 +168,20 @@ class Home extends Component {
             <div
             className="Home"
             style={{
-                backgroundImage: 'url("http://2.bp.blogspot.com/-MEkIz1Bld0c/T_4oRfvREPI/AAAAAAAAA8k/wZHwb6kUPlw/s1600/blank+book+cover.jpg")',
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                height: "100vh",
-                color: "#f5f5f5", 
-                backgroundPosition: "center"
+                // backgroundImage: 'url("http://2.bp.blogspot.com/-MEkIz1Bld0c/T_4oRfvREPI/AAAAAAAAA8k/wZHwb6kUPlw/s1600/blank+book+cover.jpg")',
+                // backgroundSize: "contain",
+                // backgroundRepeat: "no-repeat",
+                // height: "100vh",
+                // color: "#f5f5f5", 
+                // backgroundPosition: "center"
             }}
             >
-              <div style={{paddingTop: '200px'}}>
+                {/* style={{paddingTop: '200px'}} */}
+              <div >
                   <h3>
                     {this.renderNotebook()}
-                    { this.state.notebook ? this.state.notebook.title : this.renderIfNoNotebook()
-                    } 
+                    {/* { this.state.notebook ? this.state.notebook.title : this.renderIfNoNotebook()}  */}
+                    {this.renderPageFlip()}
                   </h3>
               </div>
 
@@ -129,53 +190,3 @@ class Home extends Component {
     }
 }
 export default Home
-// constructor(props) {
-//     super(props)
-//     this.totalPages = 4
-//     this.state = {
-//         selected: 0,
-//     }
-//     this.handleSelectedChange = this.handleSelectedChange.bind(this)
-//     this.previous = this.previous.bind(this)
-//     this.next = this.next.bind(this)
-// }
-
-// handleSelectedChange(selected) {
-//     this.setState({selected})
-// }
-
-// previous() {
-//     this.setState(state => ({
-//         selected: state.selected - 1
-//     }))
-// }
-
-// next() {
-//     this.setState(state => ({
-//         selected: state.selected + 1
-//     }))
-// }
-
-// {/* <FlippingPages
-//      className="Home-pages"
-//      direction="horizontal"
-//      selected={this.state.selected}
-//      onSelectedChange={this.handleSelectedChange}
-//      /* touch-action attribute is required by pointer events
-//      polyfill */
-//      touch-action="none"
-//  >
-//      <div className="Home-page Home-page_red">0</div>
-//      <div className="Home-page Home-page_green">1</div>
-//      <div className="Home-page Home-page_blue">2</div>
-//      <div className="Home-page Home-page_orange">3</div>
-//  </FlippingPages>
-//  {/* Buttons are required for keyboard navigation */}
-//  <button
-//      onClick={this.previous}
-//      disabled={!this.state.selected}
-//  >Previous</button>
-//  <button
-//      onClick={this.next}
-//      disabled={this.state.selected + 1 === this.totalPages}
-//  >Next</button> */}

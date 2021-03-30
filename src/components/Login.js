@@ -14,7 +14,7 @@ export default class Login extends Component {
         })
     }
     
-    handleSubmit = (e) => {
+    handleSubmit = (e) => { 
         e.preventDefault()
         let reqObj = {
             method: 'POST',
