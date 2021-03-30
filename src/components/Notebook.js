@@ -137,7 +137,25 @@ export default class Notebook extends Component {
         return (
             <div>
                 <h2>No Chapters Yet!</h2>
-                <Button>Add a Chapter</Button>
+                <OverlayTrigger
+                    trigger="click"
+                    key={'bottom'}
+                    placement={'bottom'}
+                    overlay={
+                        <Popover id={`popover-positioned-${'bottom'}`}>
+                        
+                        <Popover.Content>                            
+                        <form onSubmit={(e) => this.handleSubmit(e)}>
+                            <label htmlFor="fname">Title:</label>
+                            <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
+                            <input type="submit" value="Submit"></input>
+                        </form>
+                        </Popover.Content>
+                        </Popover>
+                    }
+                    >
+                    <Button variant="secondary">Create New Chapter</Button>
+                    </OverlayTrigger>
             </div>
         )
     }
