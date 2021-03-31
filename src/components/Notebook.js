@@ -100,7 +100,7 @@ export default class Notebook extends Component {
     renderChapters = (chapter) => {
         // debugger
         return (
-            <div>
+            <div className="chaptercontainer" >
                 <h2>Chapters:</h2>
                 <ol>
                 {this.state.chapters.map((chapter,i) => {

@@ -94,8 +94,9 @@ class App extends Component {
   render(){
     return (
   
-      <div className="App">
-        <Navigation view={this.state.view} user={this.state.user} handleLogout={this.handleLogout} changeView={this.changeView} />
+      <div >
+        
+        <Navigation user={this.state.user} handleLogout={this.handleLogout} changeView={this.changeView} />
         {this.renderView()}
         {/* <Login changeView={this.changeView} /> */}
         {/* <TextEditor /> */}

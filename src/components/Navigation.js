@@ -15,7 +15,9 @@ const Navigation = (props) => {
 
 
     return (
-        <Navbar>
+           
+        <Navbar >
+
             <Navbar.Brand href="#home" name="home" 
                 onClick={(e) => {props.changeView(e.target.name)}}>
                     My Notebook
@@ -37,7 +39,7 @@ const Navigation = (props) => {
                     </a>
                 </Navbar.Text>
             </Navbar.Collapse>
-        </Navbar> 
+        </Navbar>  
 
     )
 
