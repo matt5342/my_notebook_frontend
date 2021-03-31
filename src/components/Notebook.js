@@ -33,6 +33,7 @@ export default class Notebook extends Component {
                 }
                 else {
                     this.setState({
+                        finished: true,
                         chapters: chapters
                       })
                 }
@@ -83,11 +84,12 @@ export default class Notebook extends Component {
         .then(r => r.json())
         .then(data => {
             // debugger
+            this.setState({
+                finished: false
+            })
             this.getChapters()
-            console.log(data)
-
             
-            // this.props.changeView('notebook')
+            this.props.changeView('notebook')
         }) 
     }
     
@@ -109,16 +111,17 @@ export default class Notebook extends Component {
 
                 <OverlayTrigger
                     trigger="click"
-                    key={'bottom'}
-                    placement={'bottom'}
+                    key={'top'}
+                    defaultShow={false}
+                    placement={'top'}
                     overlay={
-                        <Popover id={`popover-positioned-${'bottom'}`}>
+                        <Popover id={`popover-positioned-${'top'}`}>
                         
                         <Popover.Content>                            
                         <form onSubmit={(e) => this.handleSubmit(e)}>
                             <label htmlFor="fname">Title:</label>
                             <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
-                            <input type="submit" value="Submit"></input>
+                            <button type="submit" value="Submit">Submit</button>
                         </form>
                         </Popover.Content>
                         </Popover>

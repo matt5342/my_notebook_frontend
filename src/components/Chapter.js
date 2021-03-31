@@ -7,6 +7,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import TextEditor from "../slate/TextEditor";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 // import Card from 'react-bootstrap/Accordion';
 
@@ -37,6 +38,7 @@ export default class Chapter extends Component {
                 }
                 else {
                     this.setState({
+                        isOpen: true,
                         pages: pages
                       })
                 }
@@ -73,9 +75,12 @@ export default class Chapter extends Component {
         .then(r => r.json())
         .then(data => {
             // debugger
+            this.setState({
+                isOpen: false
+            })
             this.getPages()
             // console.log(data)
-            // this.props.changeView('notebook')
+            this.props.changeView('chapter')
         }) 
     }
 
@@ -85,43 +90,13 @@ export default class Chapter extends Component {
             <div>
                 <h2>No Pages Yet!</h2>
                 <OverlayTrigger
+
                     trigger="click"
                     key={'bottom'}
                     placement={'bottom'}
                     overlay={
-                        <Popover id={`popover-positioned-${'bottom'}`}>
+                        <Popover style={{maxWidth:'90%', paddingTop:'40px'}} id={`popover-positioned-${'bottom'}`}>
                             <Jumbotron>
-                                <Popover.Content>                            
-                                <form onSubmit={(e) => this.handleSubmit(e)}>
-                                    <label htmlFor="fname">Content:</label>
-                                    <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
-                                    <input type="submit" value="Submit"></input>
-                                </form>
-                                </Popover.Content>
-                            </Jumbotron>
-                        </Popover>
-                    }
-                    >
-                    <Button variant="secondary">Create New Page</Button>
-                    </OverlayTrigger>
-            </div>
-        )
-    }
-
-    renderPages = () => {
-        return (
-            <div>
-                <h2>{this.props.chapter.title}</h2>
-
-                {this.state.pages.length > 0 && <Page pages={this.state.pages} />}
-
-                <OverlayTrigger
-                    trigger="click"
-                    key={'top'}
-                    placement={'top'}
-                    overlay={
-                        <Popover style={{maxWidth:'90%', paddingTop:'40px'}}id={`popover-positioned-${'top'}`}>
-                        <Jumbotron>
                             <Popover.Content>                            
                             <form onSubmit={(e) => this.handleSubmit(e)}>
                                 {/* <label htmlFor="fname">Content:</label> */}
@@ -138,21 +113,36 @@ export default class Chapter extends Component {
                     >
                     <Button variant="secondary">Create New Page</Button>
                     </OverlayTrigger>
-                {/* {this.state.pages.map(page => {
-                    return <div>
-                        <Accordion >
-                            <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="0">
-                                Page {page.number}
-                                </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="0">
-                                <Card.Body onClick={() => this.editPage(page)}>{page.content}</Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                        </Accordion>
-                    </div>
-                    })
-                } */}
+            </div>
+        )
+    }
+
+    renderPages = () => {
+        return (
+            <div>
+                <h2>{this.props.chapter.title}</h2>
+                {this.state.pages.length > 0 && <Page pages={this.state.pages} />}
+                <OverlayTrigger
+                    trigger="click"
+
+                    key={'top'}
+                    placement={'top'}
+                    overlay={
+                        <Popover style={{maxWidth:'90%', paddingTop:'40px'}}id={`popover-positioned-${'top'}`}>
+                            <Jumbotron>
+                                <Popover.Content>  
+                                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                                        <h3>Content:</h3>
+                                        <textarea rows='20' cols='60' onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></textarea>
+                                        <input type="submit" value="Submit"></input>
+                                    </form>
+                                </Popover.Content>
+                            </Jumbotron>
+                        </Popover>
+                    }
+                    >
+                    <Button variant="secondary">Create New Page</Button>
+                    </OverlayTrigger>
             </div>
         )
     }

@@ -57,7 +57,7 @@ class App extends Component {
   renderView = () => {    
     switch (this.state.view) {
       case 'home':
-        return <Home isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
+        return <Home changeIsReady={this.changeIsReady} isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
       case 'login':
         return <Login setUser={this.setUser} changeView={this.changeView} />
       case 'signup':
@@ -71,9 +71,14 @@ class App extends Component {
       case 'new chapter':
         return <NewChapter  user={this.state.user} changeView={this.changeView} />
       default: 
-        return <Home isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
+        return <Home changeIsReady={this.changeIsReady} isReady={this.state.isReady} user={this.state.user} changeView={this.changeView} />
 
     }
+  }
+  changeIsReady = () => {
+    this.setState({
+      isReady: !this.state.isReady
+    })
   }
   passChapter = (chapter) => {
     this.setState({
@@ -90,7 +95,7 @@ class App extends Component {
     return (
   
       <div className="App">
-        <Navigation user={this.state.user} handleLogout={this.handleLogout} changeView={this.changeView} />
+        <Navigation view={this.state.view} user={this.state.user} handleLogout={this.handleLogout} changeView={this.changeView} />
         {this.renderView()}
         {/* <Login changeView={this.changeView} /> */}
         {/* <TextEditor /> */}

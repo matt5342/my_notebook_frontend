@@ -27,7 +27,7 @@ const Navigation = (props) => {
 
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
-                    <a href="#login" name={ isUser() ? "logout" : "login"} 
+                    <a href="#login" name={ isUser() ? "logout" : 'login'} 
                         onClick={(e) => props.changeView(e.target.name)} >
                         { isUser() ? 
                         <NavDropdown title={<NavProf user={props.user} />} id='basic-nav-dropdown'>

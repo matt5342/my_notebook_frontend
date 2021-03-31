@@ -48,6 +48,7 @@ class Home extends Component {
         }, 500)
     }
     renderPageFlip = () => {
+        // debugger
         return (
             <div className="Home">
             <FlippingPages
@@ -57,12 +58,7 @@ class Home extends Component {
                 onSelectedChange={this.handleSelectedChange}
                 touch-action="none"
                 >
-                <div className="Home-page Home-page_red">Open Your Notebook to Begin</div>
-                {this.nextPage()}
-                {this.nextPage()}
-                {this.nextPage()}
-                {this.nextPage()}
-                {this.nextPage()}
+                <div className="Home-page Home-page_red">{this.state.notebook.title}</div>
                 {this.nextPage()}
                 {/* <div className="Home-page Home-page_blue">{this.state.selected}</div>
                 <div className="Home-page Home-page_orange">3</div> */}
@@ -99,6 +95,7 @@ class Home extends Component {
                     this.setState({ notebook: noNotebook, finished: true})
                 }
                 else {
+                    // this.renderPageFlip()
                     this.setState({
                         notebook: notebook, 
                         finished: true
@@ -133,7 +130,11 @@ class Home extends Component {
             this.setState({
                 finished: false
             })
+            this.getNotebook()
+            // this.props.changeIsReady()
+            // this.props.changeIsReady()
             this.props.changeView('home')
+            // this.forceUpdate()
         }) 
     }
     renderNotebook = () => {
@@ -141,7 +142,13 @@ class Home extends Component {
             return
         }   
         else if (this.props.isReady){
+            // debugger
             this.getNotebook()
+            // const runBoth = () => {
+            //     this.getNotebook()
+            //     this.renderPageFlip()
+            // }
+            // runBoth()
         }
     }
     
@@ -188,9 +195,9 @@ class Home extends Component {
                 {/* style={{paddingTop: '200px'}} */}
               <div >
                   <h3>
-                    {this.renderNotebook()}
+                    {this.state.notebook ? this.renderNotebook() : this.renderIfNoNotebook()}
                     {/* { this.state.notebook ? this.state.notebook.title : this.renderIfNoNotebook()}  */}
-                    {this.renderPageFlip()}
+                    {this.state.notebook ? this.renderPageFlip() : null}
                   </h3>
               </div>
 
