@@ -28,6 +28,9 @@ class Home extends Component {
     
     handleSelectedChange(selected) {
         this.setState({selected})
+        setTimeout(() => {
+            this.props.changeView("notebook")
+        }, 500)
     }
     
     previous() {
@@ -37,11 +40,12 @@ class Home extends Component {
     }
     
     next() {
-        let renderNotebook = setTimeout(this.props.changeView("notebook"), 450)
         this.setState(state => ({
             selected: state.selected + 1
         }))
-       return renderNotebook
+        setTimeout(() => {
+            this.props.changeView("notebook")
+        }, 500)
     }
     renderPageFlip = () => {
         return (
@@ -52,7 +56,7 @@ class Home extends Component {
                 selected={this.state.selected}
                 onSelectedChange={this.handleSelectedChange}
                 touch-action="none"
-            >
+                >
                 <div className="Home-page Home-page_red">{this.state.selected}</div>
                 {this.nextPage()}
                 {this.nextPage()}
@@ -67,18 +71,18 @@ class Home extends Component {
             <button
                 onClick={this.previous}
                 disabled={!this.state.selected}
-            >Previous</button>
+                >Previous</button>
             <button
                 onClick={this.next}
                 disabled={this.state.selected + 1 === this.totalPages}
-            >Next</button> 
+                >Next</button> 
            </div> 
         )
         
     }
     nextPage = () => {
         // debugger
-            return <div className="Home-page Home-page_green">{this.state.selected}</div>
+        return <div className="Home-page Home-page_green">{this.state.selected}</div>
     }
     getNotebook = () => {
         // debugger
