@@ -21,9 +21,9 @@ const Navigation = (props) => {
                     My Notebook
             </Navbar.Brand>
             <Navbar.Toggle />
-            <Navbar.Text>
+            {/* <Navbar.Text>
                 <a href='#notebook' name="notebook" onClick={(e) => props.changeView(e.target.name)}>Notebook</a>
-            </Navbar.Text>
+            </Navbar.Text> */}
 
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
