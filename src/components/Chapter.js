@@ -9,6 +9,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import TextEditor from "../slate/TextEditor";
 import { propTypes } from "react-bootstrap/esm/Image";
 
+
 // import Card from 'react-bootstrap/Accordion';
 
 export default class Chapter extends Component {

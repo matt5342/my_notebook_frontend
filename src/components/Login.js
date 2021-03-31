@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Alert from 'react-bootstrap/Alert'
 //Modeled off: https://www.remotestack.io/react-bootstrap-login-register-ui-templates/
 
 export default class Login extends Component {
@@ -12,6 +13,11 @@ export default class Login extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+    alert = () => {
+        <Alert key={1} variant={'danger'}>
+        Invalid Username or password.
+      </Alert>
     }
     
     handleSubmit = (e) => { 
@@ -31,10 +37,17 @@ export default class Login extends Component {
         fetch('http://localhost:3000/api/v1/login', reqObj)
         .then(r => r.json())
         .then(data => {
+            if (Object.keys(data).includes("message")){
+                alert("Invalid username or password")
+
+            }
+            else {
                 localStorage.setItem("token", data.jwt)
                 this.props.setUser(data.user)
-                this.props.changeView('home')
-            }) 
+                this.props.changeView('home')                
+            }
+            // debugger
+            })
     }
     render() {
         return (
