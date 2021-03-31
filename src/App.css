@@ -302,13 +302,13 @@ margin-top: 25px;
 }
 
 .navbar{
-  
+    /* z-index: 2; */
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgb(180, 180, 180);
-
+    overflow: hidden / remove;
   
   
   

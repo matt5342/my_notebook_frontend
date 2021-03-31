@@ -16,7 +16,7 @@ const Navigation = (props) => {
 
     return (
            
-        <Navbar >
+        <Navbar className='navbar'>
 
             <Navbar.Brand href="#home" name="home" 
                 onClick={(e) => {props.changeView(e.target.name)}}>
