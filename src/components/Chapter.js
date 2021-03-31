@@ -76,7 +76,8 @@ export default class Chapter extends Component {
         .then(data => {
             // debugger
             this.setState({
-                isOpen: false
+                isOpen: false, 
+                pages: []
             })
             this.getPages()
             // console.log(data)
