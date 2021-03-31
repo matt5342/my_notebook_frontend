@@ -17,7 +17,7 @@ code {
   background-position: center;
   height: 100vh;
   perspective: 960px;
-  opacity: 90%;
+  opacity: 100%;
   -ms-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;

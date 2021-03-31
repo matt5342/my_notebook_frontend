@@ -57,7 +57,7 @@ class Home extends Component {
                 onSelectedChange={this.handleSelectedChange}
                 touch-action="none"
                 >
-                <div className="Home-page Home-page_red">{this.state.selected}</div>
+                <div className="Home-page Home-page_red">Open Your Notebook to Begin</div>
                 {this.nextPage()}
                 {this.nextPage()}
                 {this.nextPage()}
@@ -82,7 +82,8 @@ class Home extends Component {
     }
     nextPage = () => {
         // debugger
-        return <div className="Home-page Home-page_green">{this.state.selected}</div>
+        return <div className="Home-page Home-page_green"></div>
+        // return <div className="Home-page Home-page_green">{this.state.selected}</div>
     }
     getNotebook = () => {
         // debugger
@@ -159,6 +160,7 @@ class Home extends Component {
                                 <form onSubmit={(e) => this.handleSubmit(e)}>
                                     <label for="fname">Title:</label>
                                     <input type="text" name="title" placeholder="Example Title" onChange={e => this.handleChange(e)}></input>
+                                    
                                     <button type="submit" className="btn btn-primary btn-sm">Add</button>
                                 </form>
                         </Popover.Content>

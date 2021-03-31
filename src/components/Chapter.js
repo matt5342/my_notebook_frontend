@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 import TextEditor from "../slate/TextEditor";
 
 // import Card from 'react-bootstrap/Accordion';
@@ -89,14 +90,15 @@ export default class Chapter extends Component {
                     placement={'bottom'}
                     overlay={
                         <Popover id={`popover-positioned-${'bottom'}`}>
-                        
-                        <Popover.Content>                            
-                        <form onSubmit={(e) => this.handleSubmit(e)}>
-                            <label htmlFor="fname">Content:</label>
-                            <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
-                            <input type="submit" value="Submit"></input>
-                        </form>
-                        </Popover.Content>
+                            <Jumbotron>
+                                <Popover.Content>                            
+                                <form onSubmit={(e) => this.handleSubmit(e)}>
+                                    <label htmlFor="fname">Content:</label>
+                                    <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
+                                    <input type="submit" value="Submit"></input>
+                                </form>
+                                </Popover.Content>
+                            </Jumbotron>
                         </Popover>
                     }
                     >
@@ -118,17 +120,19 @@ export default class Chapter extends Component {
                     key={'top'}
                     placement={'top'}
                     overlay={
-                        <Popover id={`popover-positioned-${'top'}`}>
-                        
-                        <Popover.Content>                            
-                        <form onSubmit={(e) => this.handleSubmit(e)}>
-                            <label htmlFor="fname">Content:</label>
-                            <div className='indexconatiner'>
-                            <TextEditor></TextEditor></div>
-                            <input onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></input>
-                            <input type="submit" value="Submit"></input>
-                        </form>
-                        </Popover.Content>
+                        <Popover style={{maxWidth:'90%', paddingTop:'40px'}}id={`popover-positioned-${'top'}`}>
+                        <Jumbotron>
+                            <Popover.Content>                            
+                            <form onSubmit={(e) => this.handleSubmit(e)}>
+                                {/* <label htmlFor="fname">Content:</label> */}
+                                <h3>Content:</h3>
+                                {/* <div className='indexconatiner'>
+                                <TextEditor></TextEditor></div> */}
+                                <textarea rows='20' cols='60' onChange= {e => this.handleChange(e)}type="text" id="fname" name="fname"></textarea>
+                                <input type="submit" value="Submit"></input>
+                            </form>
+                            </Popover.Content>
+                        </Jumbotron>
                         </Popover>
                     }
                     >
